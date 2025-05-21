@@ -192,10 +192,11 @@ def main() -> None:
     # Run the bot until the user presses Ctrl-C
 
     # application.run_polling(allowed_updates=Update.ALL_TYPES)
+    print("Bot starting on port %s listening to webhook %s", PORT, WEBHOOK_URL)
     application.run_webhook(
         listen="0.0.0.0",
         port=PORT,
-        url_path=WEBHOOK_URL,
+        webhook_url=WEBHOOK_URL + ":" + PORT,
     )
 
 
