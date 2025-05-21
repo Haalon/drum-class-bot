@@ -60,6 +60,10 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
         ["Обрести новое хобби для разгрузки", "Выступить на сцене"],
     ]
 
+    if update.message.chat_id in RECENT_REQUESTS.dict:
+        await update.message.reply_text("Вы уже отправили заявку. Мы с вами обязательно свяжемся")
+        return ConversationHandler.END
+
     await update.message.reply_text(
         "Привет. Я бот школы барабанов в Тбилиси\n" "Какую цель вы хотите достичь с помощью барабанов?",
         reply_markup=ReplyKeyboardMarkup(
@@ -77,10 +81,6 @@ async def goal(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
         ["18-25", "26-35"],
         ["36-45", "46+"],
     ]
-
-    if update.message.chat_id in RECENT_REQUESTS.dict:
-        await update.message.reply_text("Вы уже отправили заявку. Мы с вами обязательно свяжемся")
-        return ConversationHandler.END
 
     text = update.message.text
     context.user_data["goal"] = text
