@@ -193,11 +193,7 @@ def main() -> None:
 
     # application.run_polling(allowed_updates=Update.ALL_TYPES)
     print("Bot starting on port %s listening to webhook %s", PORT, WEBHOOK_URL)
-    application.run_webhook(
-        listen="0.0.0.0",
-        port=PORT,
-        webhook_url=WEBHOOK_URL + ":" + PORT,
-    )
+    application.run_webhook(listen="0.0.0.0", port=PORT, webhook_url=WEBHOOK_URL)
 
 
 if __name__ == "__main__":
