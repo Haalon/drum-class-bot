@@ -14,6 +14,7 @@ from collections import OrderedDict
 import os
 
 TOKEN = os.environ["TOKEN"]
+WEBHOOK_URL = os.environ["WEBHOOK_URL"]
 
 
 class LimitedSizeDict:
@@ -189,7 +190,12 @@ def main() -> None:
 
     # Run the bot until the user presses Ctrl-C
 
-    application.run_polling(allowed_updates=Update.ALL_TYPES)
+    # application.run_polling(allowed_updates=Update.ALL_TYPES)
+    application.run_webhook(
+        listen="0.0.0.0",
+        port=8443,
+        webhook_url=WEBHOOK_URL,
+    )
 
 
 if __name__ == "__main__":
