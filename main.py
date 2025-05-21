@@ -11,6 +11,10 @@ from telegram.ext import (
 
 from collections import OrderedDict
 
+import os
+
+TOKEN = os.environ["TOKEN"]
+
 
 class LimitedSizeDict:
     def __init__(self, max_size):
@@ -74,7 +78,7 @@ async def goal(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
         ["36-45", "46+"],
     ]
 
-    if RECENT_REQUESTS[update.message.chat_id]:
+    if update.message.chat_id in RECENT_REQUESTS.dict:
         await update.message.reply_text("Вы уже отправили заявку. Мы с вами обязательно свяжемся")
         return ConversationHandler.END
 
@@ -160,7 +164,7 @@ def main() -> None:
 
     # Create the Application and pass it your bot's token.
 
-    application = Application.builder().token("8041054213:AAHSY7S6pB-Q-TZqzcb6JLPHSXOOyrEFuwY").build()
+    application = Application.builder().token(TOKEN).build()
 
     # Add conversation handler with the states GENDER, PHOTO, LOCATION and BIO
 
