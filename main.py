@@ -14,6 +14,7 @@ from collections import OrderedDict
 import os
 
 TOKEN = os.environ["TOKEN"]
+PORT = os.environ["PORT"]
 WEBHOOK_URL = os.environ["WEBHOOK_URL"]
 
 
@@ -193,8 +194,8 @@ def main() -> None:
     # application.run_polling(allowed_updates=Update.ALL_TYPES)
     application.run_webhook(
         listen="0.0.0.0",
-        port=8443,
-        webhook_url=WEBHOOK_URL,
+        port=PORT,
+        webhook_url=WEBHOOK_URL + ":" + str(PORT),
     )
 
 
